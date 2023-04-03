@@ -325,3 +325,89 @@ def checkFireyes():
         print("[+] FireEye Agent is installed")
     else:
         print("[-] FireEye Agent is not installed")
+
+def PDFgen():
+    Orgname = input("The report for [name of CAompany/Org ] :")
+    pdf_file = "Report-of-{}.pdf".format(Orgname)
+    pdf = canvas.Canvas(pdf_file)
+
+    pdf.drawString(100, 750, "Check Configurations Security Report [{}]".format(Orgname))
+    pdf.line(100, 747, 500, 747)
+
+    pdf.drawString(100, 700, "Result of Scaning :")
+    y = 670
+    for file in suspicious_files:
+        pdf.drawString(120, y, file)
+        y -= 20
+
+    pdf.save()
+
+
+    # -- logic and executing 
+
+try : 
+    WindInfo()
+    checkAdmins()
+except : 
+    print("Can't fetch Windows Information check the issue")
+    
+try :
+    checkDomain()
+except : 
+    print("Can't fetch Windows Domain check the issue ")
+    
+try : 
+    Passcomplexity()
+except : 
+    print("Can't fetch Windows Password compliexity police check the issue ")
+
+try :
+    firewallcheck()
+except : 
+    print("Can't fetch Windows Firewall status check the issue ")
+
+try : 
+    checkFireyes()
+except : print("Can't fetch Information about Fireyes check the issue")
+
+
+try : antivirus()
+except : print("Can't fetch Information about Antivirus check the issue")
+
+try : 
+    get_usb_devices()
+    if check_removable_drives_enabled():
+        print('[+] Removable drives are enabled.')
+    else:
+        print('[-] Removable drives are disabled.')
+        
+    devices = get_usb_devices()
+    if len(devices) > 0:
+        print('[+] USB devices connected:')
+        for device in devices:
+            print(f'- {device["name"]} ({device["manufacturer"]})')
+    else:
+        print('[-] No USB devices connected.')
+
+except : print("Can't fetch Information about USB devices check the issue")
+
+# -- cloud check 
+# Ping OneDrive
+try :
+    ping_service('[+] OneDrive', 'onedrive.live.com')
+
+    # Ping Google Drive
+    ping_service('[+] Google Drive', 'drive.google.com')
+
+    # Ping Dropbox
+    ping_service('[+] Dropbox', 'www.dropbox.com')
+except : print("Can't fetch Information about Cloud services status check the issue")
+try : 
+    SMedia()
+except : print("Can't fetch Information about Soical Media check the issue")
+
+try : Portsc()
+except : print("Can't fetch Information about ports check the issue")
+
+try : AppsIns()
+except : print("Can't fetch Information about Insralled Apps check the issue")
