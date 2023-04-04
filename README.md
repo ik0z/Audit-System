@@ -1,9 +1,13 @@
 ## Audit Windows System
 
 
-## Pictue
+## Picture 
+
+#### Executing may take a few min 
 <img src="https://raw.githubusercontent.com/ik0z/Audit-System/main/Pic.png" alt="Alt text" title="Optional title">
 
+###### Report 
+<img src="https://github.com/ik0z/Audit-System/blob/main/Report.png?raw=true" alt="Alt text" title="Optional title">
 
 
 ## Features 
